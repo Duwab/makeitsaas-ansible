@@ -1,0 +1,27 @@
+---
+- hosts: test
+  remote_user: ubuntu
+  tasks:
+  - name: include variables
+    include_vars: vars/sample1.yml
+  - import_tasks: prerequisites.yml
+  - name: clone repo
+    git:
+      repo: "{{ repo_url }}"
+      dest: "/srv/{{ repo_directory }}"
+      #separate_git_dir: /src/ansible-examples.git
+      #version: release-0.22
+    become: yes
+    when: git_directory.stat.exists == False
+  - name: setup .env file
+    template:
+      src: templates/env.j2
+      dest: "/srv/{{ repo_directory }}/.env"
+      mode: 0644
+    become: yes
+  - name: build service image
+    docker_image:
+      name: "auto-image/{{ repo_directory }}"
+      path: "/srv/{{ repo_directory }}"
+  - name: run image
+    command: "docker run -d -p {{ service_port }}:3000 auto-image/{{ repo_directory }}"

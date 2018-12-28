@@ -1,0 +1,6 @@
+repo_url: https://github.com/<username>/<repository>.git
+repo_directory: <service-code-on-server>
+db_hostname: <db-hostname>
+db_username: <db-username>
+db_password: <db-password>
+service_port: <port exposed on the final server>
