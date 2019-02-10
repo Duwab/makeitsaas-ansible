@@ -1,8 +1,0 @@
----
-- hosts: test
-  remote_user: ubuntu
-  tasks:
-  - name: include variables
-    include_vars: vars/sample1.yml
-  - import_tasks: playbooks/prerequisites/prerequisites.yml
-  - import_tasks: playbooks/deploy-single-service/deploy.yml

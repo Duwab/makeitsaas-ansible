@@ -1,0 +1,10 @@
+---
+- hosts: test
+  remote_user: ubuntu
+  tasks:
+  - include_tasks: deploy-script.yml
+    loop:
+      - sample1
+      - sample2
+    loop_control:
+      loop_var: vars_file
