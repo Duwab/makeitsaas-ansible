@@ -1,7 +1,4 @@
 ---
-- name: test connection
-  ping:
-  become: yes
 - name: check if sources exist
   stat:
     path: "/srv/services/{{ repo_directory }}"
