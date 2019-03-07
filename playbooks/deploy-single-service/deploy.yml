@@ -24,16 +24,3 @@
     dest: "/srv/services/{{ repo_directory }}/.env"
     mode: 0644
   become: yes
-- name: build service image
-  docker_image:
-    name: "auto-image/{{ repo_directory }}"
-    path: "/srv/services/{{ repo_directory }}"
-    force: true
-- name: stop previous containers
-  command: "docker stop {{ container_ids_to_remove.stdout }}"
-  when: container_ids_to_remove.stdout != ''
-- name: remove previous containers
-  command: "docker rm {{ container_ids_to_remove.stdout }}"
-  when: container_ids_to_remove.stdout != ''
-- name: run image
-  command: "docker run -d -p {{ service_port }}:3000 --network=multi-host-network auto-image/{{ repo_directory }}"
