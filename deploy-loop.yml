@@ -1,5 +1,5 @@
 ---
-- hosts: test
+- hosts: computing
   remote_user: ubuntu
   tasks:
   - include_tasks: deploy-script.yml
