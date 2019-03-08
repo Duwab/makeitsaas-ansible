@@ -7,3 +7,4 @@
   - name: include variables
     include_vars: vars/{{vars_file}}.yml
   - import_tasks: playbooks/database/mysql-create.yml
+  - import_tasks: playbooks/database/mysql-checkup.yml
